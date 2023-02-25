@@ -1,7 +1,7 @@
 
 ROOT="/home/nishant/simul/speech_simul"
 FAIRSEQ="${ROOT}/itst"
-OG_FAIRSEQ="${ROOT}/fairseq"
+# OG_FAIRSEQ="${ROOT}/fairseq"
 
 EXP="${ROOT}/experiments"
 mkdir -p $EXP
@@ -235,7 +235,7 @@ itst(){
 
 itst_long(){
 
-    name="itst_debug_load_encoder"
+    name="itst_long"
 
     # fb_modelfile="/cs/natlang-expts/nishant/speech_to_text_data/en-de/pretrained_simul_en_de/convtransformer_wait5_pre7.pt"
     waitk_model_for_encoder="$EXP/st/wait_5/checkpoint_last.pt"
@@ -260,7 +260,7 @@ itst_long(){
         --fixed-pre-decision-ratio 7 \
         --threshold-delta 0.5 \
         --threshold-denom 60000 \
-        --update-freq 5 \
+        --update-freq 1 \
         --save-interval-updates 1000 \
         --keep-interval-updates 20 \
         --keep-last-epochs 30 \
@@ -276,6 +276,6 @@ itst_long(){
 ################################
 
 
-export CUDA_VISIBLE_DEVICES=0,1
+export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5
 # itst
 itst_long
