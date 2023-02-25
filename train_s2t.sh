@@ -260,7 +260,7 @@ itst_long(){
         --fixed-pre-decision-ratio 7 \
         --threshold-delta 0.5 \
         --threshold-denom 60000 \
-        --update-freq 1 \
+        --update-freq 2 \
         --save-interval-updates 1000 \
         --keep-interval-updates 20 \
         --keep-last-epochs 20 \
@@ -269,6 +269,7 @@ itst_long(){
         --log-format simple \
         --log-interval 100 \
         --wandb-project "mustc-en-de-simul" \
+        --empty-cache-freq 120 \
         | tee -a $logs/train.log
         
 }
