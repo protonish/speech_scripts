@@ -264,7 +264,45 @@ itst_long(){
         --save-interval-updates 1000 \
         --keep-interval-updates 20 \
         --keep-last-epochs 20 \
-        --find-unused-parameters \
+        --fp16 \
+        --log-format simple \
+        --log-interval 100 \
+        --wandb-project "mustc-en-de-simul" \
+        --empty-cache-freq 120 \
+        | tee -a $logs/train.log
+        
+}
+
+itst_long_continue(){
+
+    name="itst_long"
+
+    # fb_modelfile="/cs/natlang-expts/nishant/speech_to_text_data/en-de/pretrained_simul_en_de/convtransformer_wait5_pre7.pt"
+    waitk_model_for_encoder="$EXP/st/wait_5/checkpoint_last.pt"
+
+    st_modelfile="$EXP/st/$name/checkpoints"
+    logs="$EXP/st/$name/logs"
+    mkdir -p $logs $st_modelfile
+
+    python $FAIRSEQ/train.py "${mustc_root}/en-de" \
+        --config-yaml config_st_pre.yaml --train-subset train_cloud_st --valid-subset dev_cloud_st \
+        --user-dir examples/simultaneous_translation \
+        --save-dir ${st_modelfile} --num-workers 12  \
+        --optimizer adam --lr 0.0004 --lr-scheduler inverse_sqrt --clip-norm 10.0 \
+        --criterion label_smoothed_cross_entropy_with_itst_s2t_fixed_predecision \
+        --warmup-updates 4000 --max-update 100000 --max-tokens 35000 --seed 2 \
+        --label-smoothing 0.1 \
+        --task speech_to_text  \
+        --arch convtransformer_simul_trans_itst_espnet  \
+        --unidirectional-encoder \
+        --simul-type ITST_fixed_pre_decision  \
+        --fixed-pre-decision-ratio 7 \
+        --threshold-delta 0.5 \
+        --threshold-denom 60000 \
+        --update-freq 2 \
+        --save-interval-updates 1000 \
+        --keep-interval-updates 20 \
+        --keep-last-epochs 20 \
         --fp16 \
         --log-format simple \
         --log-interval 100 \
@@ -279,4 +317,4 @@ itst_long(){
 
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5
 # itst
-itst_long
+itst_long_continue
