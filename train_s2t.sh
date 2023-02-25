@@ -300,9 +300,10 @@ itst_long_continue(){
         --threshold-delta 0.5 \
         --threshold-denom 60000 \
         --update-freq 2 \
-        --save-interval-updates 1000 \
-        --keep-interval-updates 20 \
+        --save-interval-updates 1500 \
+        --keep-interval-updates 40 \
         --keep-last-epochs 20 \
+        --keep-best-checkpoints 10 \
         --fp16 \
         --log-format simple \
         --log-interval 100 \
