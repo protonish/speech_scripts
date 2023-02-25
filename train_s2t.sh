@@ -250,7 +250,7 @@ itst_long(){
         --save-dir ${st_modelfile} --num-workers 12  \
         --optimizer adam --lr 0.0004 --lr-scheduler inverse_sqrt --clip-norm 10.0 \
         --criterion label_smoothed_cross_entropy_with_itst_s2t_fixed_predecision \
-        --warmup-updates 4000 --max-update 100000 --max-tokens 28000 --seed 2 \
+        --warmup-updates 4000 --max-update 100000 --max-tokens 35000 --seed 2 \
         --label-smoothing 0.1 \
         --task speech_to_text  \
         --arch convtransformer_simul_trans_itst_espnet  \
