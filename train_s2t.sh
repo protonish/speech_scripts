@@ -263,7 +263,7 @@ itst_long(){
         --update-freq 1 \
         --save-interval-updates 1000 \
         --keep-interval-updates 20 \
-        --keep-last-epochs 30 \
+        --keep-last-epochs 20 \
         --find-unused-parameters \
         --fp16 \
         --log-format simple \
