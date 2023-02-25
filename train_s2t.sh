@@ -245,9 +245,9 @@ itst_long(){
     mkdir -p $logs $st_modelfile
 
     python $FAIRSEQ/train.py "${mustc_root}/en-de" \
-        --config-yaml config_st_pre.yaml --train-subset train_st --valid-subset dev_st \
+        --config-yaml config_st_pre.yaml --train-subset train_cloud_st --valid-subset dev_cloud_st \
         --user-dir examples/simultaneous_translation \
-        --save-dir ${st_modelfile} --num-workers 4  \
+        --save-dir ${st_modelfile} --num-workers 12  \
         --optimizer adam --lr 0.0004 --lr-scheduler inverse_sqrt --clip-norm 10.0 \
         --criterion label_smoothed_cross_entropy_with_itst_s2t_fixed_predecision \
         --warmup-updates 4000 --max-update 100000 --max-tokens 28000 --seed 2 \
